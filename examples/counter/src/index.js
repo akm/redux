@@ -1,10 +1,17 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { createStore } from 'redux'
+
+import { createStore, applyMiddleware } from 'redux'
+import createSagaMiddleware from 'redux-saga'
+
 import Counter from './components/Counter'
 import counter from './reducers'
+import { watchIncrementAsync } from './tasks'
 
-const store = createStore(counter)
+const sagaMiddleware = createSagaMiddleware()
+const store = createStore(counter, applyMiddleware(sagaMiddleware))
+sagaMiddleware.run(watchIncrementAsync)
+
 const rootEl = document.getElementById('root')
 
 const action = type => store.dispatch({type})
