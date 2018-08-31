@@ -4,7 +4,6 @@ import PropTypes from 'prop-types'
 class Counter extends Component {
   constructor(props) {
     super(props);
-    this.incrementAsync = this.incrementAsync.bind(this);
     this.incrementIfOdd = this.incrementIfOdd.bind(this);
   }
 
@@ -14,12 +13,8 @@ class Counter extends Component {
     }
   }
 
-  incrementAsync() {
-    setTimeout(this.props.onIncrement, 1000)
-  }
-
   render() {
-    const { value, onIncrement, onDecrement } = this.props
+    const { value, onIncrement, onDecrement, onIncrementAsync } = this.props
     return (
       <p>
         Clicked: {value} times
@@ -36,7 +31,7 @@ class Counter extends Component {
           Increment if odd
         </button>
         {' '}
-        <button onClick={this.incrementAsync}>
+        <button onClick={onIncrementAsync}>
           Increment async
         </button>
       </p>
