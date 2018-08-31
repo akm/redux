@@ -7,11 +7,13 @@ import counter from './reducers'
 const store = createStore(counter)
 const rootEl = document.getElementById('root')
 
+const action = type => store.dispatch({type})
+
 const render = () => ReactDOM.render(
   <Counter
     value={store.getState()}
-    onIncrement={() => store.dispatch({ type: 'INCREMENT' })}
-    onDecrement={() => store.dispatch({ type: 'DECREMENT' })}
+    onIncrement={() => action('INCREMENT')}
+    onDecrement={() => action('DECREMENT')}
   />,
   rootEl
 )
